@@ -1,0 +1,55 @@
+{
+"update_url": "https://clients2.google.com/service/update2/crx",
+
+  "name": "Audio Only Youtube",
+  "version": "0.7",
+  "manifest_version": 2,
+  "description": "Listen to audio only on youtube.",
+  "offline_enabled": true,
+  "icons": {
+    "19": "img/icon19.png",
+    "38": "img/icon38.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "*://*/*",
+    "webRequestBlocking",
+    "storage"
+  ],
+  "browser_action": {
+    "default_title": "Audio Only Youtube"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "audio-only-youtube.js"
+      ],
+      "css": [
+        "audio-only-youtube.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "audiobutton.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_page": "options.html"
+}
